@@ -5,11 +5,6 @@ Deploys Virtual Networks, subnets, route tables, security groups and association
 
 <!-- todo update module name -->
 ```hcl
-module "todo_resource_name" {
-  source = "git@github.com:hmcts/terraform-module-todo?ref=main"
-  ...
-}
-
 module "networking" {
   source = "git@github.com:hmcts/terraform-module-azure-virtual-networking?ref=main"
 
@@ -114,7 +109,7 @@ module "networking" {
 | <a name="input_network_security_groups"></a> [network\_security\_groups](#input\_network\_security\_groups) | Map of network security groups to create. | <pre>map(object({<br>    subnets      = optional(list(string))<br>    deny_inbound = optional(bool, true)<br>    rules = map(object({<br>      priority                                   = number<br>      direction                                  = string<br>      access                                     = string<br>      protocol                                   = string<br>      source_port_range                          = optional(string)<br>      source_port_ranges                         = optional(list(string))<br>      destination_port_range                     = optional(string)<br>      destination_port_ranges                    = optional(list(string))<br>      source_address_prefix                      = optional(string)<br>      source_address_prefixes                    = optional(list(string))<br>      source_application_security_group_ids      = optional(list(string))<br>      destination_address_prefix                 = optional(string)<br>      destination_address_prefixes               = optional(list(string))<br>      destination_application_security_group_ids = optional(list(string))<br>      description                                = optional(string)<br>    }))<br>  }))</pre> | `{}` | no |
 | <a name="input_product"></a> [product](#input\_product) | https://hmcts.github.io/glossary/#product | `string` | n/a | yes |
 | <a name="input_route_tables"></a> [route\_tables](#input\_route\_tables) | Map of route tables to create. | <pre>map(object({<br>    subnets = list(string)<br>    routes = map(object({<br>      address_prefix         = string<br>      next_hop_type          = string<br>      next_hop_in_ip_address = optional(string)<br>    }))<br>  }))</pre> | `{}` | no |
-| <a name="input_vnets"></a> [vnets](#input\_vnets) | Map of virtual networks and associated subnets to create. Subnets can be created in existing virtual networks by setting existing to true. | <pre>map(object({<br>    address_space = list(string)<br>    existing      = optional(bool, false)<br>    subnets = map(object({<br>      address_prefixes  = list(string)<br>      service_endpoints = optional(list(string), [])<br>      delegations = optional(map(object({<br>        service_name = string,<br>        actions      = optional(list(string), [])<br>      })))<br>    }))<br>  }))</pre> | `{}` | no |
+| <a name="input_vnets"></a> [vnets](#input\_vnets) | Map of virtual networks and associated subnets to create. Subnets can be created in existing virtual networks by setting existing to true. | <pre>map(object({<br>    address_space = optional(list(string))<br>    existing      = optional(bool, false)<br>    subnets = map(object({<br>      address_prefixes  = list(string)<br>      service_endpoints = optional(list(string), [])<br>      delegations = optional(map(object({<br>        service_name = string,<br>        actions      = optional(list(string), [])<br>      })))<br>    }))<br>  }))</pre> | `{}` | no |
 
 ## Outputs
 
