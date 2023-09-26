@@ -18,7 +18,7 @@ variable "name" {
 
 variable "vnets" {
   type = map(object({
-    address_space = list(string)
+    address_space = optional(list(string))
     existing      = optional(bool, false)
     subnets = map(object({
       address_prefixes  = list(string)
