@@ -120,8 +120,12 @@ module "networking" {
 
 | Name | Description |
 |------|-------------|
-| <a name="output_resource_group_location"></a> [resource\_group\_location](#output\_resource\_group\_location) | n/a |
-| <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | n/a |
+| <a name="output_network_security_groups_ids"></a> [network\_security\_groups\_ids](#output\_network\_security\_groups\_ids) | Map of network security group name to network security group id. |
+| <a name="output_resource_group_location"></a> [resource\_group\_location](#output\_resource\_group\_location) | The Azure region. |
+| <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | The name of the resource group |
+| <a name="output_route_table_ids"></a> [route\_table\_ids](#output\_route\_table\_ids) | Map of route table name to route table id. |
+| <a name="output_subnet_ids"></a> [subnet\_ids](#output\_subnet\_ids) | Map of subnet name to subnet id. |
+| <a name="output_vnet_ids"></a> [vnet\_ids](#output\_vnet\_ids) | Map of vnet name to vnet id. |
 <!-- END_TF_DOCS -->
 
 ## Contributing
