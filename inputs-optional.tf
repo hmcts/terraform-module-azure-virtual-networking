@@ -7,7 +7,7 @@ variable "existing_resource_group_name" {
 variable "location" {
   description = "Target Azure location to deploy the resource"
   type        = string
-  default     = "UK South"
+  default     = "UKSouth"
 }
 
 variable "name" {

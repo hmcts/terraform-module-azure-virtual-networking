@@ -3,8 +3,7 @@ data "azurerm_subscription" "current" {}
 locals {
   name           = var.name != null ? var.name : "${var.product}-${var.component}"
   is_prod        = length(regexall(".*(prod).*", var.env)) > 0
-  resource_group = var.existing_resource_group_name == null ? azurerm_resource_group.new[0].name : data.azurerm_resource_group.existing[0].name
-  location       = var.existing_resource_group_name == null ? azurerm_resource_group.new[0].location : data.azurerm_resource_group.existing[0].location
+  resource_group = var.existing_resource_group_name == null ? azurerm_resource_group.new[0].name : var.existing_resource_group_name
   flattened_routes = flatten([
     for route_table_key, route_table in var.route_tables : [
       for route_key, route in route_table.routes : {

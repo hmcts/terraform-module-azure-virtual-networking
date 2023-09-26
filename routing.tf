@@ -2,7 +2,7 @@ resource "azurerm_route_table" "this" {
   for_each                      = var.route_tables
   name                          = "${local.name}-${each.key}-${var.env}"
   resource_group_name           = local.resource_group
-  location                      = local.location
+  location                      = var.location
   disable_bgp_route_propagation = false
   tags                          = var.common_tags
 }

@@ -3,7 +3,7 @@ resource "azurerm_virtual_network" "this" {
   name                = "${local.name}-${each.key}-${var.env}"
   address_space       = each.value.address_space
   resource_group_name = local.resource_group
-  location            = local.location
+  location            = var.location
   tags                = var.common_tags
 }
 

@@ -4,7 +4,7 @@ output "resource_group_name" {
 }
 
 output "resource_group_location" {
-  value       = local.location
+  value       = var.location
   description = "The Azure region."
 }
 

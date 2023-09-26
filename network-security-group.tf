@@ -2,7 +2,7 @@ resource "azurerm_network_security_group" "this" {
   for_each            = var.network_security_groups
   name                = "${local.name}-${each.key}-${var.env}"
   resource_group_name = local.resource_group
-  location            = local.location
+  location            = var.location
   tags                = var.common_tags
 }
 
