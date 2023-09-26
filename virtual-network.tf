@@ -11,7 +11,7 @@ resource "azurerm_subnet" "this" {
   for_each             = { for subnet in local.flattened_subnets : "${subnet.vnet_key}-${subnet.subnet_key}" => subnet }
   name                 = "${local.name}-${each.value.subnet_key}-${var.env}"
   resource_group_name  = local.resource_group
-  virtual_network_name = each.value.subnet.vnet.existing ? each.value.subnet.vnet_key : azurerm_virtual_network.this[each.value.vnet_key].name
+  virtual_network_name = each.value.vnet.existing ? each.value.vnet_key : azurerm_virtual_network.this[each.value.vnet_key].name
   address_prefixes     = each.value.subnet.address_prefixes
   service_endpoints    = each.value.subnet.service_endpoints
 

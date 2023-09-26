@@ -24,6 +24,14 @@ module "networking" {
         }
       }
     }
+    existing-vnet = {
+      existing = true
+      subnets = {
+        newsubnet = {
+          address_prefixes = ["10.10.20.0/24"]
+        }
+      }
+    }
   }
 
   route_tables = {
