@@ -9,7 +9,7 @@ output "resource_group_location" {
 }
 
 output "vnet_ids" {
-  value       = { for key, value in var.vnets : key => azurerm_virtual_network.this[key].id }
+  value       = { for key, value in var.vnets : key => azurerm_virtual_network.this[key].id if value.existing == false }
   description = "Map of vnet name to vnet id."
 }
 

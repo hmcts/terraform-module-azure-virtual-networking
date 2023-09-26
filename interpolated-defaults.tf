@@ -43,6 +43,7 @@ locals {
     for vnet_key, vnet in var.vnets : [
       for subnet_key, subnet in vnet.subnets : {
         vnet_key   = vnet_key
+        vnet       = vnet
         subnet_key = subnet_key
         subnet     = subnet
       }
