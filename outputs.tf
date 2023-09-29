@@ -15,7 +15,12 @@ output "vnet_ids" {
 
 output "subnet_ids" {
   value       = { for subnet in local.flattened_subnets : "${subnet.vnet_key}-${subnet.subnet_key}" => azurerm_subnet.this["${subnet.vnet_key}-${subnet.subnet_key}"].id }
-  description = "Map of subnet name to subnet id."
+  description = "Map of subnet key to subnet id."
+}
+
+output "subnet_names" {
+  value       = { for subnet in local.flattened_subnets : "${subnet.vnet_key}-${subnet.subnet_key}" => azurerm_subnet.this["${subnet.vnet_key}-${subnet.subnet_key}"].name }
+  description = "Map of subnet key to subnet name."
 }
 
 output "route_table_ids" {
