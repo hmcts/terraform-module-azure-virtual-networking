@@ -28,6 +28,22 @@ resource "azurerm_network_security_rule" "rules" {
   description                                = each.value.rule.description
 }
 
+resource "azurerm_network_security_rule" "deny_inbound" {
+  for_each                    = { for key, value in var.network_security_groups : key => value if value.deny_inbound == true }
+  network_security_group_name = azurerm_network_security_group.this[each.key].name
+  resource_group_name         = local.resource_group
+  name                        = "DenyAllInbound"
+  direction                   = "Inbound"
+  access                      = "Deny"
+  protocol                    = "*"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  priority                    = 4096 # The lowest priority possible via Terraform
+  description                 = "Default DenyInbound rule"
+}
+
 resource "azurerm_subnet_network_security_group_association" "this" {
   for_each                  = { for nsg in local.flattened_subnet_nsg_associations : "${nsg.nsg_key}-${nsg.subnet}" => nsg }
   subnet_id                 = azurerm_subnet.this[each.value.subnet].id
