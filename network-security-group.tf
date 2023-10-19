@@ -31,7 +31,7 @@ resource "azurerm_network_security_rule" "rules" {
 resource "azurerm_network_security_rule" "deny_inbound" {
   for_each                    = { for key, value in var.network_security_groups : key => value if value.deny_inbound == true }
   network_security_group_name = azurerm_network_security_group.this[each.key].name
-  resource_group_name         = azurerm_network_security_group.this[each.value.nsg_key].resource_group_name
+  resource_group_name         = azurerm_network_security_group.this[each.key].resource_group_name
   name                        = "DenyAllInbound"
   direction                   = "Inbound"
   access                      = "Deny"
