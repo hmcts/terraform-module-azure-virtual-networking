@@ -1,6 +1,6 @@
 resource "azurerm_route_table" "this" {
   for_each                      = var.route_tables
-  name                          = "${local.name}-${each.key}-${var.env}"
+  name                          = each.value.name_override == null ? "${local.name}-${each.key}-${var.env}" : each.value.name_override
   resource_group_name           = local.resource_group
   location                      = var.location
   disable_bgp_route_propagation = false
@@ -9,7 +9,7 @@ resource "azurerm_route_table" "this" {
 
 resource "azurerm_route" "this" {
   for_each               = { for route in local.flattened_routes : "${route.route_table_key}-${route.route_key}" => route }
-  name                   = each.key
+  name                   = each.value.route.name_override == null ? each.key : each.value.route.name_override
   resource_group_name    = local.resource_group
   route_table_name       = azurerm_route_table.this[each.value.route_table_key].name
   address_prefix         = each.value.route.address_prefix

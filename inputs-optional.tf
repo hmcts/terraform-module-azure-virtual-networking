@@ -18,9 +18,11 @@ variable "name" {
 
 variable "vnets" {
   type = map(object({
+    name_override = optional(string)
     address_space = optional(list(string))
     existing      = optional(bool, false)
     subnets = map(object({
+      name_override     = optional(string)
       address_prefixes  = list(string)
       service_endpoints = optional(list(string), [])
       delegations = optional(map(object({
@@ -35,8 +37,10 @@ variable "vnets" {
 
 variable "route_tables" {
   type = map(object({
-    subnets = list(string)
+    name_override = optional(string)
+    subnets       = list(string)
     routes = map(object({
+      name_override          = optional(string)
       address_prefix         = string
       next_hop_type          = string
       next_hop_in_ip_address = optional(string)
@@ -48,9 +52,11 @@ variable "route_tables" {
 
 variable "network_security_groups" {
   type = map(object({
-    subnets      = optional(list(string))
-    deny_inbound = optional(bool, true)
+    name_override = optional(string)
+    subnets       = optional(list(string))
+    deny_inbound  = optional(bool, true)
     rules = map(object({
+      name_override                              = optional(string)
       priority                                   = number
       direction                                  = string
       access                                     = string

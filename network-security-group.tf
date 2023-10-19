@@ -1,6 +1,6 @@
 resource "azurerm_network_security_group" "this" {
   for_each            = var.network_security_groups
-  name                = "${local.name}-${each.key}-${var.env}"
+  name                = each.value.name_override == null ? "${local.name}-${each.key}-${var.env}" : each.value.name_override
   resource_group_name = local.resource_group
   location            = var.location
   tags                = var.common_tags
@@ -10,7 +10,7 @@ resource "azurerm_network_security_rule" "rules" {
   for_each                                   = { for rule in local.flattened_nsg_rules : "${rule.nsg_key}-${rule.rule_key}" => rule }
   network_security_group_name                = azurerm_network_security_group.this[each.value.nsg_key].name
   resource_group_name                        = local.resource_group
-  name                                       = each.key
+  name                                       = each.value.rule.name_override == null ? each.key : each.value.rule.name_override
   priority                                   = each.value.rule.priority
   direction                                  = each.value.rule.direction
   access                                     = each.value.rule.access

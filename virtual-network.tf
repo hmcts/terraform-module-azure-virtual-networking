@@ -1,6 +1,6 @@
 resource "azurerm_virtual_network" "this" {
   for_each            = { for key, value in var.vnets : key => value if value.existing == false }
-  name                = "${local.name}-${each.key}-${var.env}"
+  name                = each.value.name_override == null ? "${local.name}-${each.key}-${var.env}" : each.value.name_override
   address_space       = each.value.address_space
   resource_group_name = local.resource_group
   location            = var.location
@@ -9,7 +9,7 @@ resource "azurerm_virtual_network" "this" {
 
 resource "azurerm_subnet" "this" {
   for_each             = { for subnet in local.flattened_subnets : "${subnet.vnet_key}-${subnet.subnet_key}" => subnet }
-  name                 = "${local.name}-${each.value.subnet_key}-${var.env}"
+  name                 = each.value.subnet.name_override == null ? "${local.name}-${each.value.subnet_key}-${var.env}" : each.value.subnet.name_override
   resource_group_name  = local.resource_group
   virtual_network_name = each.value.vnet.existing ? each.value.vnet_key : azurerm_virtual_network.this[each.value.vnet_key].name
   address_prefixes     = each.value.subnet.address_prefixes
