@@ -119,6 +119,7 @@ module "networking" {
 | <a name="output_resource_group_location"></a> [resource\_group\_location](#output\_resource\_group\_location) | The Azure region. |
 | <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | The name of the resource group |
 | <a name="output_route_table_ids"></a> [route\_table\_ids](#output\_route\_table\_ids) | Map of route table name to route table id. |
+| <a name="output_route_table_names"></a> [route\_table\_names](#output\_route\_table\_names) | Map of route table id to route table name. |
 | <a name="output_subnet_ids"></a> [subnet\_ids](#output\_subnet\_ids) | Map of subnet key to subnet id. |
 | <a name="output_subnet_names"></a> [subnet\_names](#output\_subnet\_names) | Map of subnet key to subnet name. |
 | <a name="output_vnet_ids"></a> [vnet\_ids](#output\_vnet\_ids) | Map of vnet key to vnet id. |
