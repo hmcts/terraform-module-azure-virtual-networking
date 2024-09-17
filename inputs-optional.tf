@@ -79,3 +79,7 @@ variable "network_security_groups" {
   description = "Map of network security groups to create."
   default     = {}
 }
+
+variable "bgp_route_propagation_enabled" {
+  default = true
+}
