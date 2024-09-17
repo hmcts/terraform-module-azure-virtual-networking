@@ -3,7 +3,7 @@ resource "azurerm_route_table" "this" {
   name                          = each.value.name_override == null ? "${local.name}-${each.key}-${var.env}" : each.value.name_override
   resource_group_name           = each.value.resource_group_override == null ? local.resource_group : each.value.resource_group_override
   location                      = var.location
-  bgp_route_propagation_enabled = true
+  bgp_route_propagation_enabled = var.bgp_route_propagation_enabled
   tags                          = var.common_tags
 }
 
