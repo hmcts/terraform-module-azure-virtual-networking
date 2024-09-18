@@ -18,9 +18,9 @@ variable "name" {
 
 variable "vnets" {
   type = map(object({
-    name_override = optional(string)
-    address_space = optional(list(string))
-    existing      = optional(bool, false)
+    name_override                     = optional(string)
+    address_space                     = optional(list(string))
+    existing                          = optional(bool, false)
     private_endpoint_network_policies = "Disabled"
     subnets = map(object({
       name_override     = optional(string)
