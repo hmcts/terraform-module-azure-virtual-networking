@@ -21,6 +21,7 @@ variable "vnets" {
     name_override = optional(string)
     address_space = optional(list(string))
     existing      = optional(bool, false)
+    private_endpoint_network_policies = "Disabled"
     subnets = map(object({
       name_override     = optional(string)
       address_prefixes  = list(string)
@@ -82,8 +83,4 @@ variable "network_security_groups" {
 
 variable "bgp_route_propagation_enabled" {
   default = true
-}
-
-variable "private_endpoint_network_policies" {
-  default = "Disabled"
 }
