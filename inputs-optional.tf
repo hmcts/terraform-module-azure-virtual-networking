@@ -83,3 +83,7 @@ variable "network_security_groups" {
 variable "bgp_route_propagation_enabled" {
   default = true
 }
+
+variable "private_endpoint_network_policies" {
+  default = "Disabled"
+}
