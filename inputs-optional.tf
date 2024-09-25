@@ -17,20 +17,21 @@ variable "name" {
 }
 
 variable "private_endpoint_network_policies" {
-  type        = string
-  default     = null
-  }
+  type    = string
+  default = null
+}
 
 
 variable "vnets" {
   type = map(object({
-    name_override                     = optional(string)
-    address_space                     = optional(list(string))
-    existing                          = optional(bool, false)
+    name_override = optional(string)
+    address_space = optional(list(string))
+    existing      = optional(bool, false)
     subnets = map(object({
-      name_override     = optional(string)
-      address_prefixes  = list(string)
-      service_endpoints = optional(list(string), [])
+      name_override                     = optional(string)
+      address_prefixes                  = list(string)
+      service_endpoints                 = optional(list(string), [])
+      private_endpoint_network_policies = optional(string, "Disabled")
       delegations = optional(map(object({
         service_name = string,
         actions      = optional(list(string), [])
