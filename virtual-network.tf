@@ -14,7 +14,7 @@ resource "azurerm_subnet" "this" {
   virtual_network_name              = each.value.vnet.existing ? each.value.vnet_key : azurerm_virtual_network.this[each.value.vnet_key].name
   address_prefixes                  = each.value.subnet.address_prefixes
   service_endpoints                 = each.value.subnet.service_endpoints
-  private_endpoint_network_policies = local.private_endpoint_network_policies
+  private_endpoint_network_policies = each.value.subnet.private_endpoint_network_policies
 
   dynamic "delegation" {
     for_each = each.value.subnet.delegations != null ? each.value.subnet.delegations : {}
