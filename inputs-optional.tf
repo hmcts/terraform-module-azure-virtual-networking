@@ -16,12 +16,6 @@ variable "name" {
   description = "The default name will be product+component+env, you can override the product+component part by setting this"
 }
 
-variable "private_endpoint_network_policies" {
-  type    = string
-  default = null
-}
-
-
 variable "vnets" {
   type = map(object({
     name_override = optional(string)
