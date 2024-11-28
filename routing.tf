@@ -1,10 +1,9 @@
 resource "azurerm_route_table" "this" {
-  for_each                      = var.route_tables
-  name                          = each.value.name_override == null ? "${local.name}-${each.key}-${var.env}" : each.value.name_override
-  resource_group_name           = each.value.resource_group_override == null ? local.resource_group : each.value.resource_group_override
-  location                      = var.location
-  disable_bgp_route_propagation = false
-  tags                          = var.common_tags
+  for_each            = var.route_tables
+  name                = each.value.name_override == null ? "${local.name}-${each.key}-${var.env}" : each.value.name_override
+  resource_group_name = each.value.resource_group_override == null ? local.resource_group : each.value.resource_group_override
+  location            = var.location
+  tags                = var.common_tags
 }
 
 resource "azurerm_route" "this" {
