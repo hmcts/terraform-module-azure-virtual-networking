@@ -30,6 +30,7 @@ variable "vnets" {
         actions      = optional(list(string), [])
       })))
     }))
+    dns_servers = optional(list(string), [])
   }))
   description = "Map of virtual networks and associated subnets to create. Subnets can be created in existing virtual networks by setting existing to true."
   default     = {}

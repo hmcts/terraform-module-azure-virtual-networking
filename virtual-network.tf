@@ -7,6 +7,12 @@ resource "azurerm_virtual_network" "this" {
   tags                = var.common_tags
 }
 
+resource "azurerm_virtual_network_dns_servers" "this" {
+  for_each           = { for key, value in var.vnets : key => value if value.dns_servers != null && length(value.dns_servers) > 0 }
+  virtual_network_id = azurerm_virtual_network.this[each.key].id
+  dns_servers        = each.value.dns_servers
+}
+
 resource "azurerm_subnet" "this" {
   for_each             = { for subnet in local.flattened_subnets : "${subnet.vnet_key}-${subnet.subnet_key}" => subnet }
   name                 = each.value.subnet.name_override == null ? "${local.name}-${each.value.subnet_key}-${var.env}" : each.value.subnet.name_override
