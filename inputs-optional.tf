@@ -22,10 +22,11 @@ variable "vnets" {
     address_space = optional(list(string))
     existing      = optional(bool, false)
     subnets = map(object({
-      name_override                     = optional(string)
-      address_prefixes                  = list(string)
-      service_endpoints                 = optional(list(string), [])
-      private_endpoint_network_policies = optional(string, "Enabled")
+      name_override                                 = optional(string)
+      address_prefixes                              = list(string)
+      service_endpoints                             = optional(list(string), [])
+      private_endpoint_network_policies             = optional(string, "Enabled")
+      private_link_service_network_policies_enabled = optional(bool, true)
       delegations = optional(map(object({
         service_name = string,
         actions      = optional(list(string), [])
